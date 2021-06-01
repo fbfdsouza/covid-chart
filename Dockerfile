@@ -15,7 +15,7 @@ RUN yarn run build
 RUN yarn global add serve
 
 # Navigate to build folder
-WORKDIR /usr/src/app/
+WORKDIR /usr/src/app/dist
 
 # Start the application
 CMD serve -p 8000 -s . 
