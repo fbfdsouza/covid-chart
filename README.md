@@ -48,7 +48,14 @@ docker build . -t covidchart
 docker run -it -p 8000:8000  covidchart
 ```
 
-3 - In this context access your browser using http://localhost:8000 
+3 - Access it on your browser
+```
+ http://localhost:8000 
+```
+
+## Deployment:
+The application has been deployed on [Heroku](https://www.heroku.com/) in a docker container and can be accessed here:
+https://atlanticocovidchart.herokuapp.com/
 
 #### Application Preview
 
