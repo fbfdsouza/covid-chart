@@ -18,4 +18,4 @@ RUN yarn global add serve
 WORKDIR /usr/src/app/dist
 
 # Start the application
-CMD yarn start -p $PORT
+CMD serve -p $PORT -s . 
