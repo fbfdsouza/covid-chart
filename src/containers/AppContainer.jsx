@@ -18,31 +18,47 @@ function App() {
 
   const returnFromInterval = (intervalData) => {
     //only end point related to world has the attribute NewConfirmed
-    if (intervalData[0].hasOwnProperty("NewConfirmed")) {
-      return intervalData.reduce(
-        (acc, country) => {
-          return {
-            TotalConfirmed:
-              Number(acc.TotalConfirmed) + Number(country.NewConfirmed),
-            TotalDeaths: Number(acc.TotalDeaths) + Number(country.NewDeaths),
-            TotalRecovered:
-              Number(acc.TotalRecovered) + Number(country.NewRecovered),
-          };
-        },
-        { TotalConfirmed: 0, TotalDeaths: 0, TotalRecovered: 0 }
-      );
+    if (intervalData.length > 1) {
+      if (intervalData[0].hasOwnProperty("NewConfirmed")) {
+        return intervalData.reduce(
+          (acc, country) => {
+            return {
+              TotalConfirmed:
+                Number(acc.TotalConfirmed) + Number(country.NewConfirmed),
+              TotalDeaths: Number(acc.TotalDeaths) + Number(country.NewDeaths),
+              TotalRecovered:
+                Number(acc.TotalRecovered) + Number(country.NewRecovered),
+            };
+          },
+          { TotalConfirmed: 0, TotalDeaths: 0, TotalRecovered: 0 }
+        );
+      }
+      return {
+        TotalConfirmed:
+          Number(intervalData[intervalData.length - 1].Confirmed) -
+          Number(intervalData[0].Confirmed),
+        TotalDeaths:
+          Number(intervalData[intervalData.length - 1].Deaths) -
+          Number(intervalData[0].Deaths),
+        TotalRecovered:
+          Number(intervalData[intervalData.length - 1].Recovered) -
+          Number(intervalData[0].Recovered),
+      };
+    } else {
+      if (intervalData[0].hasOwnProperty("NewConfirmed")) {
+        return {
+          TotalConfirmed: Number(intervalData[0].TotalConfirmed),
+          TotalDeaths: Number(intervalData[0].TotalDeaths),
+          TotalRecovered: Number(intervalData[0].TotalRecovered),
+        };
+      }
+
+      return {
+        TotalConfirmed: Number(intervalData[0].Confirmed),
+        TotalDeaths: Number(intervalData[0].Deaths),
+        TotalRecovered: Number(intervalData[0].Recovered),
+      };
     }
-    return {
-      TotalConfirmed:
-        Number(intervalData[intervalData.length - 1].Confirmed) -
-        Number(intervalData[0].Confirmed),
-      TotalDeaths:
-        Number(intervalData[intervalData.length - 1].Deaths) -
-        Number(intervalData[0].Deaths),
-      TotalRecovered:
-        Number(intervalData[intervalData.length - 1].Recovered) -
-        Number(intervalData[0].Recovered),
-    };
   };
 
   const updateFromAndToDateBasedOnInterval = (fromDateString, toDateString) => {
