@@ -24,12 +24,21 @@ With this application users can search the following data by country and date in
 1 - Install the dependencies
 
 ```bash
-yarn install
+npm install
 ```
 
 2 - Execute the project
 ```bash
-yarn start
+npm start
+```
+
+
+## Get it up and running with docker
+
+### With Docker installed inside the root project folder.
+
+1 - Build the image
+
 ```
 
 
