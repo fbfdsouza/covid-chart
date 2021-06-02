@@ -32,7 +32,6 @@ function App() {
         { TotalConfirmed: 0, TotalDeaths: 0, TotalRecovered: 0 }
       );
     }
-    debugger;
     return {
       TotalConfirmed:
         Number(intervalData[intervalData.length - 1].Confirmed) -
