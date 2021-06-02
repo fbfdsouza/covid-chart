@@ -17,10 +17,10 @@ function App() {
   const [toDate, setToDate] = useState(undefined);
 
   const returnFromInterval = (intervalData) => {
-    return intervalData.reduce(
-      (acc, country) => {
-        //only world has the attribute NewConfirmed
-        if (country.NewConfirmed) {
+    //only end point related to world has the attribute NewConfirmed
+    if (intervalData[0].hasOwnProperty("NewConfirmed")) {
+      return intervalData.reduce(
+        (acc, country) => {
           return {
             TotalConfirmed:
               Number(acc.TotalConfirmed) + Number(country.NewConfirmed),
@@ -28,30 +28,37 @@ function App() {
             TotalRecovered:
               Number(acc.TotalRecovered) + Number(country.NewRecovered),
           };
-        }
-        return {
-          TotalConfirmed:
-            Number(acc.TotalConfirmed) + Number(country.Confirmed),
-          TotalDeaths: Number(acc.TotalDeaths) + Number(country.Deaths),
-          TotalRecovered:
-            Number(acc.TotalRecovered) + Number(country.Recovered),
-        };
-      },
-      { TotalConfirmed: 0, TotalDeaths: 0, TotalRecovered: 0 }
-    );
+        },
+        { TotalConfirmed: 0, TotalDeaths: 0, TotalRecovered: 0 }
+      );
+    }
+    debugger;
+    return {
+      TotalConfirmed:
+        Number(intervalData[intervalData.length - 1].Confirmed) -
+        Number(intervalData[0].Confirmed),
+      TotalDeaths:
+        Number(intervalData[intervalData.length - 1].Deaths) -
+        Number(intervalData[0].Deaths),
+      TotalRecovered:
+        Number(intervalData[intervalData.length - 1].Recovered) -
+        Number(intervalData[0].Recovered),
+    };
   };
 
-  const updateFromAndToDateIfTheyAreEqual = (fromDateString, toDateString) => {
+  const updateFromAndToDateBasedOnInterval = (fromDateString, toDateString) => {
+    const updatedFromDate = new Date(fromDateString);
+    const updatedToDate = new Date(toDateString);
     if (fromDateString === toDateString) {
-      const updatedFromDate = new Date(fromDateString);
-      const updatedToDate = new Date(toDateString);
       updatedFromDate.setUTCHours(0);
       updatedToDate.setUTCHours(23);
       updatedToDate.setMinutes(59);
       updatedToDate.setSeconds(59);
       return [formatDateToApi(updatedFromDate), formatDateToApi(updatedToDate)];
     }
-    return [fromDateString, toDateString];
+    updatedFromDate.setUTCHours(0);
+    updatedToDate.setUTCHours(0);
+    return [updatedFromDate, updatedToDate];
   };
 
   const updateGraph = (TotalConfirmed, TotalDeaths, TotalRecovered) => {
@@ -105,7 +112,7 @@ function App() {
         let fromDateString = formatDateToApi(fromDate);
         let toDateString = formatDateToApi(toDate);
 
-        [fromDateString, toDateString] = updateFromAndToDateIfTheyAreEqual(
+        [fromDateString, toDateString] = updateFromAndToDateBasedOnInterval(
           fromDateString,
           toDateString
         );
@@ -143,7 +150,7 @@ function App() {
         let fromDateString = formatDateToApi(fromDate);
         let toDateString = formatDateToApi(toDate);
 
-        [fromDateString, toDateString] = updateFromAndToDateIfTheyAreEqual(
+        [fromDateString, toDateString] = updateFromAndToDateBasedOnInterval(
           fromDateString,
           toDateString
         );
