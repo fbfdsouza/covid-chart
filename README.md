@@ -10,11 +10,11 @@ With this application users can search the following data by country and date in
 
 ## Main resources and technologies involved
 
-[Webpack](https://webpack.js.org/) for bundling our source files.
-[react-day-picker](https://react-day-picker.js.org/) for showing an modern and elegant date picker.
-[HighCharts](https://www.highcharts.com/) for plotting the API data in a nice and clear graph. 
-[Heroku](https://www.heroku.com/) for hosting our aplication.
-[Docker](https://www.docker.com/) for containerization of our application.
+* [Webpack](https://webpack.js.org/) for bundling our source files.
+* [react-day-picker](https://react-day-picker.js.org/) for showing an modern and elegant date picker.
+* [HighCharts](https://www.highcharts.com/) for plotting the API data in a nice and clear graph. 
+* [Heroku](https://www.heroku.com/) for hosting our aplication.
+* [Docker](https://www.docker.com/) for containerization of our application.
   
   
 ## Get it up and running
