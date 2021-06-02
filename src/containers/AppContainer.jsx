@@ -170,7 +170,10 @@ function App() {
         const result = await covidInfo.get(`/summary`);
         const { TotalConfirmed, TotalDeaths, TotalRecovered } =
           result.data.Global;
-        updateGraph({ TotalConfirmed, TotalDeaths, TotalRecovered });
+        updateGraph(
+          { TotalConfirmed, TotalDeaths, TotalRecovered },
+          graphTypeConstants.COLUMN
+        );
       })();
     }
 
@@ -226,7 +229,10 @@ function App() {
             TotalDeaths: 0,
             TotalRecovered: 0,
           };
-        updateGraph({ TotalConfirmed, TotalDeaths, TotalRecovered });
+        updateGraph(
+          { TotalConfirmed, TotalDeaths, TotalRecovered },
+          graphTypeConstants.COLUMN
+        );
       })();
     }
 
