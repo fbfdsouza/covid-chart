@@ -1,4 +1,4 @@
-# Atlântico Challenge
+# Atlântico Challenge - Covid Chart
 
 This is the project of a small [React](https://reactjs.org) application that is able to show in a friendly and responsive interface some important data based in the current pandemic crisis where data is fed by [COVID19 Public API](https://covid19api.com/).
 
@@ -32,6 +32,24 @@ npm install
 npm start
 ```
 
-#### A sample of the app being used
+
+## Get it up and running with docker
+
+### With Docker installed inside the root project folder.
+
+1 - Build the image
+
+```
+docker build . -t covidchart
+```
+
+2 - Start it
+```
+docker run -it -p 8000:8000  covidchart
+```
+
+3 - In this context access your browser using http://localhost:8000 
+
+#### Application Preview
 
 ![map_sample](resources/covidchart.gif)
