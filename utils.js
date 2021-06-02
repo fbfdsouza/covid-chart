@@ -15,9 +15,6 @@ export const chartOptions = {
   title: {
     text: "Covid Analytics",
   },
-  xAxis: {
-    type: "category",
-  },
   yAxis: {
     title: {
       text: "Covid Analytics",
@@ -62,4 +59,10 @@ export const chartOptions = {
 
 export const formatDateToApi = (date) => {
   return date?.toISOString()?.replace(/.\d+Z$/g, "Z");
+};
+
+export const formatToSimpleDate = (date) => {
+  return (
+    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+  );
 };
