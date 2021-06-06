@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Dropdown from "../components/Dropdown";
 import IntervalDatePicker from "../components/IntervalDatePicker";
 import covidInfo from "../api/fetchCovidInfo";
@@ -18,13 +18,17 @@ const graphTypeConstants = {
 
 function App() {
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState({
-    label: "world",
-    value: "world",
-  });
+  const [selectedCountry, setSelectedCountry] = useState("world");
   const [dataView, setDataView] = useState(chartOptions);
   const [fromDate, setFromDate] = useState(undefined);
   const [toDate, setToDate] = useState(undefined);
+
+  const handleSelectCountryOption = useCallback(
+    (option) => {
+      setSelectedCountry(option.label);
+    },
+    [selectedCountry]
+  );
 
   const returnFromInterval = (intervalData, graphType) => {
     //only end point related to world has the attribute NewConfirmed
@@ -165,7 +169,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (selectedCountry.label === "world" && !fromDate && !toDate) {
+    if (selectedCountry === "world" && !fromDate && !toDate) {
       (async () => {
         const result = await covidInfo.get(`/summary`);
         const { TotalConfirmed, TotalDeaths, TotalRecovered } =
@@ -177,7 +181,7 @@ function App() {
       })();
     }
 
-    if (selectedCountry.label === "world" && fromDate && toDate) {
+    if (selectedCountry === "world" && fromDate && toDate) {
       (async () => {
         let fromDateString = formatDateToApi(fromDate);
         let toDateString = formatDateToApi(toDate);
@@ -217,11 +221,11 @@ function App() {
       })();
     }
 
-    if (selectedCountry.label !== "world" && !fromDate && !toDate) {
+    if (selectedCountry !== "world" && !fromDate && !toDate) {
       (async () => {
         const result = await covidInfo.get(`/summary`);
         const filteredCountry = result?.data?.Countries?.filter(
-          (countryItem) => countryItem.Country === selectedCountry.label
+          (countryItem) => countryItem.Country === selectedCountry
         )[0];
         const { TotalConfirmed, TotalDeaths, TotalRecovered } =
           filteredCountry || {
@@ -236,7 +240,7 @@ function App() {
       })();
     }
 
-    if (selectedCountry.label !== "world" && fromDate && toDate) {
+    if (selectedCountry !== "world" && fromDate && toDate) {
       (async () => {
         let fromDateString = formatDateToApi(fromDate);
         let toDateString = formatDateToApi(toDate);
@@ -246,15 +250,12 @@ function App() {
           toDateString
         );
 
-        const result = await covidInfo.get(
-          `/country/${selectedCountry.label}`,
-          {
-            params: {
-              from: fromDateString,
-              to: toDateString,
-            },
-          }
-        );
+        const result = await covidInfo.get(`/country/${selectedCountry}`, {
+          params: {
+            from: fromDateString,
+            to: toDateString,
+          },
+        });
         if (result.data.length > 1) {
           const [days, confirmed, deaths, recovered] = returnFromInterval(
             result.data,
@@ -297,6 +298,12 @@ function App() {
       ...countryOptions.sort(orderByOptionLabel),
     ];
   };
+
+  const countryOptions = useMemo(
+    () => convertCountryToOptions(countries),
+    [countries.length]
+  );
+
   return (
     <div
       style={{
@@ -316,9 +323,9 @@ function App() {
       >
         <Dropdown
           label="Select a location Context"
-          options={convertCountryToOptions(countries)}
+          options={countryOptions}
           selected={selectedCountry}
-          onSelectedChange={setSelectedCountry}
+          onSelectedChange={handleSelectCountryOption}
         />
 
         <IntervalDatePicker

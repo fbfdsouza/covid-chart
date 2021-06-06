@@ -19,7 +19,7 @@ const GraphCard = ({ options }) => {
 export default GraphCard;
 
 GraphCard.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.object.isRequired,
 };
 
 GraphCard.defaultProps = {};

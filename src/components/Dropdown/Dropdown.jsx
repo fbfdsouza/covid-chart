@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import PropTypes from "prop-types";
 
 const Dropdown = ({ label, options, selected, onSelectedChange }) => {
@@ -22,7 +22,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   }, []);
 
   const renderedOptions = options.map((option) => {
-    if (option.value === selected.value) {
+    if (option.value === selected) {
       return null;
     }
     return (
@@ -35,6 +35,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
       </div>
     );
   });
+  console.log("render dropdown");
 
   return (
     <div ref={ref} className="ui form">
@@ -50,7 +51,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
           className={`ui selection dropdown ${open ? "visible active" : ""}`}
         >
           <i className="dropdown icon" />
-          <div className="text">{selected.label}</div>
+          <div className="text">{selected}</div>
           <div className={`menu ${open ? "visible transition" : ""}`}>
             {renderedOptions}
           </div>
@@ -62,14 +63,13 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
 
 Dropdown.propTypes = {
   label: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   selected: PropTypes.string.isRequired,
   onSelectedChange: PropTypes.func.isRequired,
 };
 
 Dropdown.defaultProps = {
   label: "",
-  options: [],
 };
 
-export default Dropdown;
+export default memo(Dropdown);
