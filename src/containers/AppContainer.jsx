@@ -19,7 +19,7 @@ const graphTypeConstants = {
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("world");
-  const [dataView, setDataView] = useState(chartOptions);
+  const [dataView, setDataView] = useState({});
   const [fromDate, setFromDate] = useState(undefined);
   const [toDate, setToDate] = useState(undefined);
 
@@ -312,6 +312,14 @@ function App() {
 
   const memoizedFromDate = useMemo(() => fromDate, [fromDate?.toDateString()]);
   const memoizedToDate = useMemo(() => toDate, [toDate?.toDateString()]);
+  const memoizedDataView = useMemo(() => {
+    return dataView;
+  }, [
+    fromDate?.toDateString(),
+    toDate?.toDateString(),
+    selectedCountry,
+    JSON.stringify(dataView),
+  ]);
 
   return (
     <div
@@ -345,7 +353,7 @@ function App() {
           toDateHandler={handleToChange}
         />
       </div>
-      <GraphCard options={dataView} />
+      <GraphCard options={memoizedDataView} />
     </div>
   );
 }
