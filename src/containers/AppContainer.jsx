@@ -8,6 +8,7 @@ import {
   chartOptions,
   formatDateToApi,
   formatToSimpleDate,
+  dateSort,
 } from "../../utils";
 import "../../index.css";
 
@@ -156,7 +157,9 @@ function App() {
       },
       series,
       xAxis: {
-        categories: graphData.days,
+        categories: graphData.days
+          ? graphData.days.sort(dateSort)
+          : graphData.days,
       },
     });
   };

@@ -42,3 +42,7 @@ export const formatToSimpleDate = (date) => {
     date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
   );
 };
+
+export const dateSort = (date1, date2) => {
+  return new Date(date1) - new Date(date2);
+};
