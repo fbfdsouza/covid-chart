@@ -280,13 +280,19 @@ function App() {
     }
   }, [selectedCountry, fromDate, toDate]);
 
-  const handleFromChange = (day) => {
-    setFromDate(day);
-  };
+  const handleFromChange = useCallback(
+    (day) => {
+      setFromDate(day);
+    },
+    [fromDate?.toDateString()]
+  );
 
-  const handleToChange = (day) => {
-    setToDate(day);
-  };
+  const handleToChange = useCallback(
+    (day) => {
+      setToDate(day);
+    },
+    [toDate?.toDateString()]
+  );
 
   const convertCountryToOptions = (_countries) => {
     const countryOptions = _countries.map((_country) => {
@@ -303,6 +309,9 @@ function App() {
     () => convertCountryToOptions(countries),
     [countries.length]
   );
+
+  const memoizedFromDate = useMemo(() => fromDate, [fromDate?.toDateString()]);
+  const memoizedToDate = useMemo(() => toDate, [toDate?.toDateString()]);
 
   return (
     <div
@@ -330,8 +339,8 @@ function App() {
 
         <IntervalDatePicker
           label="Select a date range"
-          fromDate={fromDate}
-          toDate={toDate}
+          fromDate={memoizedFromDate}
+          toDate={memoizedToDate}
           fromDateHandler={handleFromChange}
           toDateHandler={handleToChange}
         />

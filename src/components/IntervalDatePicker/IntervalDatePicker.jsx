@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 
@@ -14,6 +14,8 @@ const IntervalDatePicker = ({
   toDateHandler,
 }) => {
   const modifiers = { start: fromDate, end: toDate };
+
+  console.log("render date picker");
   return (
     <div className="InputFromTo">
       <div style={{ textAlign: "center", marginTop: "10px" }}>
@@ -97,4 +99,4 @@ IntervalDatePicker.defaultProps = {
   toDate: undefined,
 };
 
-export default IntervalDatePicker;
+export default memo(IntervalDatePicker);
