@@ -342,7 +342,7 @@ function App() {
         }}
       >
         <Dropdown
-          label="Select a location Context"
+          label="Select a location context"
           options={countryOptions}
           selected={selectedCountry}
           onSelectedChange={handleSelectCountryOption}
