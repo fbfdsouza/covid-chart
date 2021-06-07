@@ -31,30 +31,6 @@ export const chartOptions = {
       },
     },
   },
-
-  series: [
-    {
-      name: "Browsers",
-      colorByPoint: true,
-      data: [
-        {
-          name: "Total Confirmed Cases",
-          y: 10,
-          drilldown: "Total Confirmed Cases",
-        },
-        {
-          name: "Total Deaths Cases",
-          y: 7,
-          drilldown: "Total Deaths",
-        },
-        {
-          name: "Total Recovered Cases",
-          y: 5,
-          drilldown: "Total Recovered Cases",
-        },
-      ],
-    },
-  ],
 };
 
 export const formatDateToApi = (date) => {
