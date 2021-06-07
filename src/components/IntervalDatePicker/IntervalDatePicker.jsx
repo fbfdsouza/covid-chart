@@ -18,7 +18,10 @@ const IntervalDatePicker = ({
   return (
     <div className="InputFromTo">
       <div style={{ textAlign: "center", marginTop: "10px" }}>
-        <label className="label" style={{ color: "#fff", fontSize: "18px" }}>
+        <label
+          className="label"
+          style={{ color: "#fff", fontSize: "18px", fontWeight: 700 }}
+        >
           {label}
         </label>
       </div>
