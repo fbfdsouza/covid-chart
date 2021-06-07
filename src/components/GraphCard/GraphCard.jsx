@@ -5,7 +5,6 @@ import HighchartsReact from "highcharts-react-official";
 import "./styles/GraphCard.css";
 
 const GraphCard = ({ options }) => {
-  console.log("render graph");
   return (
     <div style={{ margin: "0% 2%" }}>
       <HighchartsReact

@@ -15,7 +15,6 @@ const IntervalDatePicker = ({
 }) => {
   const modifiers = { start: fromDate, end: toDate };
 
-  console.log("render date picker");
   return (
     <div className="InputFromTo">
       <div style={{ textAlign: "center", marginTop: "10px" }}>
