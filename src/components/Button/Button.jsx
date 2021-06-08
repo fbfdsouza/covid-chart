@@ -18,7 +18,6 @@ const Button = ({ onClick, children, style, submit, disabled, className }) => {
 Button.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node,
-  // eslint-disable-next-line react/forbid-prop-types
   style: PropTypes.object,
   submit: PropTypes.bool,
   disabled: PropTypes.bool,
