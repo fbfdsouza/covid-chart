@@ -3,16 +3,21 @@ import Highcharts from "highcharts";
 import PropTypes from "prop-types";
 import HighchartsReact from "highcharts-react-official";
 import "./styles/GraphCard.css";
+import styled from "styled-components";
+
+export const GraphCardWrapper = styled.div`
+  margin: 0% 2%;
+`;
 
 const GraphCard = ({ options }) => {
   return (
-    <div style={{ margin: "0% 2%" }}>
+    <GraphCardWrapper>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
         styleMode={true}
       />
-    </div>
+    </GraphCardWrapper>
   );
 };
 

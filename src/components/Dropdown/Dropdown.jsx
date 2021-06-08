@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+export const DropDownWrapper = styled.div`
+  text-align: center;
+
+  #dropdownLabel {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+`;
 
 const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   const [open, setOpen] = useState(false);
@@ -38,13 +49,8 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
 
   return (
     <div ref={ref} className="ui form">
-      <div className="field" style={{ textAlign: "center" }}>
-        <label
-          className="label"
-          style={{ color: "#fff", fontSize: "18px", marginBottom: "10px" }}
-        >
-          {label}
-        </label>
+      <DropDownWrapper className="field">
+        <label id="dropdownLabel">{label}</label>
         <div
           onClick={() => setOpen(!open)}
           className={`ui selection dropdown ${open ? "visible active" : ""}`}
@@ -55,7 +61,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
             {renderedOptions}
           </div>
         </div>
-      </div>
+      </DropDownWrapper>
     </div>
   );
 };

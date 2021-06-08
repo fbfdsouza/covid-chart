@@ -11,6 +11,7 @@ import {
   dateSort,
 } from "../../utils";
 import "../../index.css";
+import { AppWrapper, HeaderWrapper } from "./../styled";
 
 const graphTypeConstants = {
   LINE: "line",
@@ -325,22 +326,8 @@ function App() {
   ]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        width: "100%",
-        flexDirection: "column",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+    <AppWrapper>
+      <HeaderWrapper>
         <Dropdown
           label="Select a location context"
           options={countryOptions}
@@ -355,9 +342,9 @@ function App() {
           fromDateHandler={handleFromChange}
           toDateHandler={handleToChange}
         />
-      </div>
+      </HeaderWrapper>
       <GraphCard options={memoizedDataView} />
-    </div>
+    </AppWrapper>
   );
 }
 

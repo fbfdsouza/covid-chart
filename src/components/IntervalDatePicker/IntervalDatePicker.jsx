@@ -1,10 +1,20 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 import DayPickerInput from "react-day-picker/DayPickerInput";
-
+import { formatDate, parseDate } from "react-day-picker/moment";
+import styled from "styled-components";
 import "react-day-picker/lib/style.css";
 
-import { formatDate, parseDate } from "react-day-picker/moment";
+export const DatePickerLabel = styled.div`
+  text-align: center;
+  margin-top: 10px;
+
+  & #datePickerLabel {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+  }
+`;
 
 const IntervalDatePicker = ({
   label,
@@ -16,15 +26,10 @@ const IntervalDatePicker = ({
   const modifiers = { start: fromDate, end: toDate };
 
   return (
-    <div className="InputFromTo">
-      <div style={{ textAlign: "center", marginTop: "10px" }}>
-        <label
-          className="label"
-          style={{ color: "#fff", fontSize: "18px", fontWeight: 700 }}
-        >
-          {label}
-        </label>
-      </div>
+    <div>
+      <DatePickerLabel>
+        <label id="datePickerLabel">{label}</label>
+      </DatePickerLabel>
       <DayPickerInput
         value={fromDate?.state?.month}
         placeholder="From"
