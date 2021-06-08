@@ -1,4 +1,4 @@
-# Atlântico Challenge - Covid Chart
+# Covid Chart
 
 This is a project of a small [React](https://reactjs.org) application which is able to show in a friendly and responsive interface some important data based in the current pandemic crisis where data is fed by [COVID19 Public API](https://covid19api.com/).
 
