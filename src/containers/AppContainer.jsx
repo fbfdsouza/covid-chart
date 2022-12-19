@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Dropdown from "../components/Dropdown";
 import IntervalDatePicker from "../components/IntervalDatePicker";
-import covidInfo from "../api/fetchCovidInfo";
 import GraphCard from "../components/GraphCard";
 import {
   orderByOptionLabel,
@@ -12,6 +11,8 @@ import {
 } from "../../utils";
 import "../../index.css";
 import { AppWrapper, HeaderWrapper } from "./../styled";
+import { getCountryData, getSummary, getWorldData } from "../api/covidAPI";
+import useCountries from "../hooks/useCountries";
 
 const graphTypeConstants = {
   LINE: "line",
@@ -19,7 +20,7 @@ const graphTypeConstants = {
 };
 
 function App() {
-  const [countries, setCountries] = useState([]);
+  const countries = useCountries();
   const [selectedCountry, setSelectedCountry] = useState("world");
   const [dataView, setDataView] = useState({});
   const [fromDate, setFromDate] = useState(undefined);
@@ -166,16 +167,9 @@ function App() {
   };
 
   useEffect(() => {
-    (async () => {
-      const result = await covidInfo.get("/countries");
-      setCountries(result.data);
-    })();
-  }, []);
-
-  useEffect(() => {
     if (selectedCountry === "world" && !fromDate && !toDate) {
       (async () => {
-        const result = await covidInfo.get(`/summary`);
+        const result = await getSummary();
         const { TotalConfirmed, TotalDeaths, TotalRecovered } =
           result.data.Global;
         updateGraph(
@@ -194,12 +188,8 @@ function App() {
           fromDateString,
           toDateString
         );
-        const result = await covidInfo.get("/world", {
-          params: {
-            from: fromDateString,
-            to: toDateString,
-          },
-        });
+
+        const result = await getWorldData(fromDateString, toDateString);
 
         if (result.data.length > 1) {
           const [days, confirmed, deaths, recovered] = returnFromInterval(
@@ -227,7 +217,7 @@ function App() {
 
     if (selectedCountry !== "world" && !fromDate && !toDate) {
       (async () => {
-        const result = await covidInfo.get(`/summary`);
+        const result = await getSummary();
         const filteredCountry = result?.data?.Countries?.filter(
           (countryItem) => countryItem.Country === selectedCountry
         )[0];
@@ -254,12 +244,8 @@ function App() {
           toDateString
         );
 
-        const result = await covidInfo.get(`/country/${selectedCountry}`, {
-          params: {
-            from: fromDateString,
-            to: toDateString,
-          },
-        });
+        const result = await getCountryData(selectedCountry, fromDateString, toDateString)
+
         if (result.data.length > 1) {
           const [days, confirmed, deaths, recovered] = returnFromInterval(
             result.data,

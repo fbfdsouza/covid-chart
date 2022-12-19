@@ -1,8 +1,8 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Button from "../Dropdown";
+import Dropdown from "../Dropdown";
 
-test("renders Button a message", () => {
-  render(<Button />);
+test("renders Dropdown a message", () => {
+  render(<Dropdown />);
 });
