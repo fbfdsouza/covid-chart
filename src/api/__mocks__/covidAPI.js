@@ -1,11 +1,11 @@
 import { countries, datedWorldData, summary } from "./mockedData";
 
 export const getCountries = () => {
-    return new Promise.resolve(countries)
+    return Promise.resolve(countries)
   };
   
   export const getSummary = () => {
-    return new Promise.resolve(summary)
+    return Promise.resolve({data: summary})
   };
   
   export const getCountryData = (country, fromdDate, toDate) => {
@@ -18,6 +18,6 @@ export const getCountries = () => {
   };
   
   export const getWorldData = () => {
-    return new Promise.resolve(datedWorldData)
+    return Promise.resolve(datedWorldData)
   };
   

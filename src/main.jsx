@@ -1,12 +1,5 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom";
 import AppContainer from "./containers/AppContainer";
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
-
-root.render(
-  <StrictMode>
-    <AppContainer />
-  </StrictMode>
-);
+ReactDOM.render(<AppContainer />, document.getElementById("root"));
