@@ -4,5 +4,6 @@ import "@testing-library/jest-dom/extend-expect";
 import DatePicker from "../DatePicker";
 
 test("renders DatePicker a message", () => {
-  render(<DatePicker />);
+  const onChange = () => null
+  render(<DatePicker dayPickerProps={onChange} />);
 });
