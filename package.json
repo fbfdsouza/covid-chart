@@ -33,9 +33,6 @@
       "react-app/jest"
     ]
   },
-  "jest": {
-    "testEnvironment": "jsdom"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -55,7 +52,7 @@
     "@babel/preset-env": "^7.14.4",
     "@babel/preset-react": "^7.10.4",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.0.0-alpha.7",
+    "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "^8.0.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-class-properties": "^6.24.1",

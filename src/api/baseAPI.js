@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export default axios.create({
+export const fetchCovidInfo = axios.create({
   baseURL: "https://api.covid19api.com",
 });

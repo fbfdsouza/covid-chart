@@ -1,7 +1,7 @@
-import fetchCovidInfo from "./baseAPI";
+import { fetchCovidInfo } from "./baseAPI";
 
 export const getCountries = () => {
-  return fetch("https://api.covid19api.com/countries");
+  return fetchCovidInfo.get("/countries");
 };
 
 export const getSummary = () => {
