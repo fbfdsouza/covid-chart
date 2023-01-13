@@ -8,7 +8,7 @@ import {
   returnFromInterval,
   updateFromAndToDateBasedOnInterval,
   updateGraph
-} from "../../utils";
+} from "../../utils/utils";
 import "../../index.css";
 import { AppWrapper, HeaderWrapper } from "./../styled";
 import { getCountryData, getSummary, getWorldData } from "../api/covidAPI";

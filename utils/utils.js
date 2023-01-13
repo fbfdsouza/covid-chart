@@ -1,4 +1,4 @@
-import { graphTypeConstants } from "./constants";
+import { graphTypeConstants } from "../constants";
 
 export const orderByOptionLabel = (option1, option2) => {
   if (option1.label < option2.label) {
